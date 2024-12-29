@@ -48,3 +48,11 @@ class OrderUpdateByProductNameView(generics.UpdateAPIView):
         product_name = self.kwargs['product_name']
         order = get_object_or_404(Order, product_name=product_name, customer=self.request.user)
         return order
+
+class OrderDeleteByProductNameView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated,IsOwner]
+
+    def get_object(self):
+        product_name = self.kwargs['product_name']
+        order = get_object_or_404(Order, product_name=product_name, customer=self.request.user)
+        return order

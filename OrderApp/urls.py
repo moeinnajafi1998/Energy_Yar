@@ -6,6 +6,6 @@ urlpatterns = [
     path('orders/create/', OrderCreateView.as_view(), name='order-create'),
     path('orders/<str:product_name>/', OrderDetailByProductNameView.as_view(), name='order-detail-by-product-name'),
     path('orders/<str:product_name>/update/', OrderUpdateByProductNameView.as_view(), name='order-update-by-product-name'),
-    # path('orders/<int:pk>/delete/', views.OrderDeleteView.as_view(), name='order-delete'),
+    path('orders/<str:product_name>/delete/', OrderDeleteByProductNameView.as_view(), name='order-delete-by-product-name'),
 
 ]

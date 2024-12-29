@@ -10,3 +10,8 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         exclude = ['customer']
+
+class UpdateOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['product_name', 'quantity', 'total_price']

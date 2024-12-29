@@ -5,7 +5,7 @@ from rest_framework.authentication import TokenAuthentication
 from django.shortcuts import get_object_or_404
 
 from .models import Order
-from .serializers import OrderSerializer,ReadOrderSerializer
+from .serializers import *
 from .permissions import * 
 
 class OrderListView(generics.ListAPIView):
@@ -32,6 +32,16 @@ class OrderCreateView(generics.CreateAPIView):
 class OrderDetailByProductNameView(generics.RetrieveAPIView):
     serializer_class = ReadOrderSerializer
     permission_classes = [IsOwner]
+    authentication_classes = [TokenAuthentication]  
+
+    def get_object(self):
+        product_name = self.kwargs['product_name']
+        order = get_object_or_404(Order, product_name=product_name, customer=self.request.user)
+        return order
+    
+class OrderUpdateByProductNameView(generics.UpdateAPIView):
+    serializer_class = UpdateOrderSerializer
+    permission_classes = [IsAuthenticated,IsOwner]
     authentication_classes = [TokenAuthentication]  
 
     def get_object(self):

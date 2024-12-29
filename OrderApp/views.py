@@ -15,9 +15,7 @@ class OrderListView(generics.ListAPIView):
 
     def get_queryset(self):
         if self.request.user.role == 'admin':
-            print('admin')
             return Order.objects.all()
-        print('customer')
         return Order.objects.filter(customer=self.request.user)
 
 class OrderCreateView(generics.CreateAPIView):

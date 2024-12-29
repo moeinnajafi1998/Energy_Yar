@@ -1,17 +1,21 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from django_filters.rest_framework import DjangoFilterBackend
 
 from django.shortcuts import get_object_or_404
 
 from .models import Order
 from .serializers import *
 from .permissions import * 
+from .filters import OrderFilter 
 
 class OrderListView(generics.ListAPIView):
     serializer_class = ReadOrderSerializer
     permission_classes = [IsAuthenticated, IsAdminOrCustomer]
     authentication_classes = [TokenAuthentication]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = OrderFilter
 
     def get_queryset(self):
         if self.request.user.role == 'admin':

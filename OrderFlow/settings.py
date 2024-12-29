@@ -32,6 +32,7 @@ INSTALLED_APPS.append('OrderApp')
 
 # third parties
 INSTALLED_APPS.append('rest_framework')
+INSTALLED_APPS.append('rest_framework.authtoken')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,4 +1,5 @@
 from pathlib import Path
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,13 +9,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8*+p$h%!zt)s4mn98he=0xjj#2_pv4uu5-wde(ln$0mn=p!06_'
+config = dotenv_values('.env')
+
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = list(config['ALLOWED_HOSTS'])
 
 # Application definition
 
@@ -70,10 +72,14 @@ WSGI_APPLICATION = 'OrderFlow.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': {  # Postgres
+        'ENGINE': config['DEFAULT_ENGINE'],
+        'NAME': config['DEFAULT_NAME'],
+        'USER': config['DEFAULT_USER'],
+        'PASSWORD': config['DEFAULT_PASSWORD'],
+        'HOST': config['DEFAULT_HOST'],
+        'PORT': config['DEFAULT_PORT'],
+    },
 }
 
 REST_FRAMEWORK = {

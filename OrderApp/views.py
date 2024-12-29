@@ -29,7 +29,7 @@ class OrderCreateView(generics.CreateAPIView):
 
 class OrderDetailByProductNameView(generics.RetrieveAPIView):
     serializer_class = ReadOrderSerializer
-    permission_classes = [IsAuthenticated,IsOwner]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]  
 
     def get_object(self):
@@ -39,7 +39,7 @@ class OrderDetailByProductNameView(generics.RetrieveAPIView):
     
 class OrderUpdateByProductNameView(generics.UpdateAPIView):
     serializer_class = UpdateOrderSerializer
-    permission_classes = [IsAuthenticated,IsOwner]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]  
 
     def get_object(self):
@@ -48,7 +48,7 @@ class OrderUpdateByProductNameView(generics.UpdateAPIView):
         return order
 
 class OrderDeleteByProductNameView(generics.DestroyAPIView):
-    permission_classes = [IsAuthenticated,IsOwner]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]  
 
     def get_object(self):

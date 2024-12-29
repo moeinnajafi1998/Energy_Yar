@@ -51,6 +51,7 @@ class OrderUpdateByProductNameView(generics.UpdateAPIView):
 
 class OrderDeleteByProductNameView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated,IsOwner]
+    authentication_classes = [TokenAuthentication]  
 
     def get_object(self):
         product_name = self.kwargs['product_name']

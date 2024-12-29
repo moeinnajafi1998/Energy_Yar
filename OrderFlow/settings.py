@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
 # project apps
 INSTALLED_APPS.append('OrderApp')
+INSTALLED_APPS.append('drf_yasg')
 
 # third parties
 INSTALLED_APPS.append('rest_framework')

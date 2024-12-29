@@ -31,7 +31,7 @@ class OrderCreateView(generics.CreateAPIView):
 
 class OrderDetailByProductNameView(generics.RetrieveAPIView):
     serializer_class = ReadOrderSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated,IsOwner]
     authentication_classes = [TokenAuthentication]  
 
     def get_object(self):
